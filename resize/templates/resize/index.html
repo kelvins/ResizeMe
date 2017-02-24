@@ -1,0 +1,57 @@
+<!DOCTYPE html>
+
+{% load static %}
+
+<html lang="en-us">
+	<head>
+		<meta charset="utf-8"/>
+		<title>ResizeMe</title>
+
+		<link href="https://fonts.googleapis.com/css?family=Inconsolata" rel="stylesheet">
+		<link rel="stylesheet" type="text/css" href="{% static 'css/style.css' %}">
+	</head>
+	<body>
+
+	<div class="content">
+		<p>Welcome to the {{ name }}</p>
+
+		<div class="image">
+			<img id="preview_image" />
+		</div>
+
+		<div class="upload">
+			<label for="file" id="upload_file">BROWSE</label>
+			<input type="file" value="" name="file" id="file" />
+		</div>
+
+		<div class="sizes">
+			<table>
+				<tr>
+					<td>Width</td>
+					<td></td>
+					<td>Height</td>
+				</tr>
+				<tr>
+					<td><input type="number" value="100" name="width" id="width" /></td>
+					<td>X</td>
+					<td><input type="number" value="100" name="height" id="height" /></td>
+				</tr>
+			</table>
+		</div>
+
+		<div class="resize_me">
+			<button class="default" name="resize" id="resize">RESIZE ME</button>
+		</div>
+
+		<p>Welcome to the {{ name }}</p>
+
+	</div>
+
+	<footer>
+		Made with <img src="{% static 'imgs/love.png' %}" alt="love" height="15" width="15"> by <a target="_blank" href="http://kelvins.github.io">Kelvin S.</a>
+	</footer>
+
+	<script type="text/javascript" src="{% static 'js/script.js' %}" align="middle"></script>
+
+	</body>
+</html>

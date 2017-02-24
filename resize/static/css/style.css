@@ -1,0 +1,111 @@
+
+html, body {
+	background-color: #faf7f0;
+	text-align: center;
+    font-family: 'Inconsolata', monospace;
+}
+
+p {
+	color: #ef3c4f;
+}
+
+a {
+	color: #ef3c4f;
+	text-decoration: none;
+}
+
+a:hover {
+    color: #000000;
+}
+
+footer {
+	position: fixed;
+	bottom: 0;
+	width: 100%;
+	height: 40px;
+	color: #000000;
+}
+
+div {
+	margin-bottom: 20px;
+}
+
+input {
+	text-align: center;
+    font-family: 'Inconsolata', monospace;
+    border: 2px solid #ef3c4f;
+    height: 20px;
+    border-radius: 8px;
+    font-size: 18px;
+    max-width: 100px;
+    color: #ef3c4f;
+}
+
+.default {
+	background-color: #ef3c4f;
+    border: 2px solid #ef3c4f;
+    text-decoration: none;
+    font-size: 18px;
+    border-radius: 8px;
+	color: #faf7f0;
+	padding: 10px 20px;
+    font-family: 'Inconsolata', monospace;
+	cursor:pointer;
+
+    -webkit-transition-duration: 0.4s; /* Safari */
+    transition-duration: 0.4s;
+}
+
+.default:hover {
+    background-color: #faf7f0;
+    border: 2px solid #ef3c4f;
+    color: #ef3c4f;
+}
+
+.sizes {
+    color: #ef3c4f;
+    display: inline-block;
+}
+
+/* Hide the HTML5 number input’s spin box */
+input::-webkit-outer-spin-button,
+input::-webkit-inner-spin-button {
+    /* display: none; <- Crashes Chrome on hover */
+    -webkit-appearance: none;
+    margin: 0; /* <-- Apparently some margin are still there even though it's hidden */
+}
+
+#file {
+   opacity: 0;
+   position: absolute;
+   z-index: -1;
+}
+
+#upload_file {
+	background-color: #ef3c4f;
+    border: 2px solid #ef3c4f;
+    text-decoration: none;
+    font-size: 18px;
+    border-radius: 8px;
+	color: #faf7f0;
+	padding: 10px 20px;
+    font-family: 'Inconsolata', monospace;
+	cursor:pointer;
+
+    -webkit-transition-duration: 0.4s; /* Safari */
+    transition-duration: 0.4s;
+}
+
+#upload_file:hover {
+    background-color: #faf7f0;
+    border: 2px solid #ef3c4f;
+    color: #ef3c4f;
+}
+
+#preview_image {
+	width: 400px;
+	height: 250px;
+    border: 2px solid #ef3c4f;
+    border-radius: 8px;
+	object-fit: contain;
+}
