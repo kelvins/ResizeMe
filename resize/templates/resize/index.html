@@ -13,37 +13,42 @@
 	<body>
 
 	<div class="content">
-		<p>Welcome to the {{ name }}</p>
+		<p>Welcome to RESIZE ME</p>
 
-		<div class="image">
-			<img id="preview_image" />
-		</div>
+		<form name="main_form">
 
-		<div class="upload">
-			<label for="file" id="upload_file">BROWSE</label>
-			<input type="file" value="" name="file" id="file" />
-		</div>
+			<div class="image">
+				<img id="preview_image" src="{% static 'imgs/placeholder.png' %}" /> <!-- http://placehold.it/400x250 -->
+				<div id="original_size"></div>
+			</div>
 
-		<div class="sizes">
-			<table>
-				<tr>
-					<td>Width</td>
-					<td></td>
-					<td>Height</td>
-				</tr>
-				<tr>
-					<td><input type="number" value="100" name="width" id="width" /></td>
-					<td>X</td>
-					<td><input type="number" value="100" name="height" id="height" /></td>
-				</tr>
-			</table>
-		</div>
+			<div class="upload">
+				<label for="file" id="upload_file">BROWSE</label>
+				<input type="file" accept="image/*" name="file" id="file" />
+			</div>
 
-		<div class="resize_me">
-			<button class="default" name="resize" id="resize">RESIZE ME</button>
-		</div>
+			<div class="sizes">
+				<table>
+					<tr>
+						<td>Width</td>
+						<td></td>
+						<td>Height</td>
+					</tr>
+					<tr>
+						<td><input type="number" value="100" name="width" id="width" /></td>
+						<td>X</td>
+						<td><input type="number" value="100" name="height" id="height" /></td>
+					</tr>
+				</table>
+			</div>
 
-		<p>Welcome to the {{ name }}</p>
+			<div class="resize_me">
+				<button class="default" name="resize" id="resize">RESIZE ME</button>
+			</div>
+
+			<p>{{ slogan }}</p>
+
+		</form>
 
 	</div>
 
