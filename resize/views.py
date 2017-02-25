@@ -13,6 +13,8 @@ slogans.append('Resize any image to any size with few clicks!')
 slogans.append('The simplest image resizing app!')
 slogans.append('Just load an image, set the width and height, select an image format and click on RESIZE ME!')
 slogans.append('This is an open source project created under the MIT license, feel free to contribute to the project on Github!')
+slogans.append('If you liked the app please share with your friends!')
+slogans.append('If you find any bug please create an issue on Github!')
 
 def index(request):
 
