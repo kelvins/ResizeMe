@@ -13,3 +13,19 @@ document.getElementById("file").onchange = function () {
     // read the image file as a data URL.
     reader.readAsDataURL(this.files[0]);
 };
+
+function onWidthValueChanged() {
+
+	if(document.getElementById("preview_image").src != "") {
+
+	    var image = new Image();
+	    image.src = document.getElementById("preview_image").src;
+
+	    var width = image.width;
+	    var height = image.height;
+
+	    var factor = (height*100)/width;
+
+		document.getElementById("height").value = parseInt(((factor*document.getElementById("width").value)/100), 10);
+	}
+}
