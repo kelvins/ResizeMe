@@ -12,52 +12,52 @@
 	</head>
 	<body>
 
-	<div class="content">
+	<p>Welcome to RESIZE ME</p>
 
-		<p>Welcome to RESIZE ME</p>
+	<form method="post" enctype="multipart/form-data">{% csrf_token %}
 
-		<form method="post" enctype="multipart/form-data">{% csrf_token %}
+		<div>
+			<img id="preview_image" src="{% static 'imgs/placeholder.png' %}" /> <!-- http://placehold.it/400x250 -->
+			<div id="original_size"></div>
+		</div>
 
-			<div class="image">
-				<img id="preview_image" src="{% static 'imgs/placeholder.png' %}" /> <!-- http://placehold.it/400x250 -->
-				<div id="original_size"></div>
-			</div>
+		<div class="upload">
+			<label for="file" id="upload_file">BROWSE</label>
+			<input type="file" accept="image/*" name="file" id="file" onchange="onFileChanged();" />
+		</div>
 
-			<div class="upload">
-				<label for="file" id="upload_file">BROWSE</label>
-				<input type="file" accept="image/*" name="file" id="file" />
-			</div>
+		<div class="sizes">
+			<table>
+				<tr>
+					<td>Width</td>
+					<td></td>
+					<td>Height</td>
+				</tr>
+				<tr>
+					<td><input type="number" value="100" name="width" id="width" min="1" max="5000" required onkeyup="onWidthValueChanged();" /></td>
+					<td>X</td>
+					<td><input type="number" value="100" name="height" id="height" min="1" max="5000" required onkeyup="onHeightValueChanged();" /></td>
+				</tr>
+			</table>
+		</div>
 
-			<div class="sizes">
-				<table>
-					<tr>
-						<td>Width</td>
-						<td></td>
-						<td>Height</td>
-					</tr>
-					<tr>
-						<td><input type="number" value="100" name="width" id="width" onkeyup="onWidthValueChanged();" /></td>
-						<td>X</td>
-						<td><input type="number" value="100" name="height" id="height" onkeyup="onHeightValueChanged();" /></td>
-					</tr>
-				</table>
-			</div>
+		<div class="image_formats">
+			<input type="radio" name="image_format" value="jpg" id="jpg"> <label for="jpg">JPG</label>
+			<input type="radio" name="image_format" value="png" id="png" checked> <label for="png">PNG</label>
+			<input type="radio" name="image_format" value="bmp" id="bmp"> <label for="bmp">BMP</label>
+		</div>
 
-			<div class="image_format">
-				<input type="radio" name="image_format" value="jpg" id="jpg"> <label for="jpg">JPG</label>
-				<input type="radio" name="image_format" value="png" id="png" checked> <label for="png">PNG</label>
-				<input type="radio" name="image_format" value="bmp" id="bmp"> <label for="bmp">BMP</label>
-			</div>
+		<div>
+			<button class="default_button" type="submit">RESIZE ME</button>
+		</div>
 
-			<div class="resize_me">
-				<button class="default" type="submit" value="resize" name="resize" id="resize">RESIZE ME</button>
-			</div>
-
+		{% if error_message != '' %}
+			<p class="error_message">{{ error_message }}</p>
+		{% else %}
 			<p>{{ slogan }}</p>
+		{% endif %}
 
-		</form>
-
-	</div>
+	</form>
 
 	<footer>
 		Made with <img src="{% static 'imgs/love.png' %}" alt="love" height="15" width="15"> by <a target="_blank" href="http://kelvins.github.io">Kelvin S.</a>
