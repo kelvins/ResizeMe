@@ -38,7 +38,7 @@ footer {
 	height: 30px;
 	padding-top: 10px;
 	color: #000000;
-	background-color: #faf7f0;
+	/*background-color: #faf7f0;*/
 }
 
 input {
@@ -66,7 +66,7 @@ input:focus {
 	color: #faf7f0;
 	padding: 10px 20px;
     font-family: 'Inconsolata', monospace;
-	cursor:pointer;
+	cursor: pointer;
 
     -webkit-transition-duration: 0.4s; /* Safari */
     transition-duration: 0.4s;
@@ -139,4 +139,29 @@ input::-webkit-inner-spin-button {
 
 #original_size {
 	color: #ef3c4f;
+}
+
+input[type=radio] {
+	display: none;
+	cursor: pointer;
+}
+
+input[type=radio] + label {
+	color: #ef3c4f;
+	cursor: pointer;
+	padding: 5px 10px;
+    border: 2px solid #ef3c4f;
+    border-radius: 8px;
+}
+
+input[type=radio]:checked + label {
+	color: #faf7f0;
+	padding: 5px 10px;
+    border: 2px solid #ef3c4f;
+    border-radius: 8px;
+    background-color: #ef3c4f;
+}
+
+.image_format {
+	margin-bottom: 15px;
 }
