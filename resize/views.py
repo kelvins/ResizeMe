@@ -1,12 +1,18 @@
 #from django.shortcuts import render
-from django.http import HttpResponse, HttpResponseRedirect
-from django.template import loader
-import random
-import StringIO
-import datetime
-from PIL import Image
-from .forms import UploadFileForm
+from django.http import HttpResponse, HttpResponseRedirect, StreamingHttpResponse
 from django.core.files.base import ContentFile
+from django.template import loader
+import random, StringIO, datetime, os, mimetypes
+from .forms import UploadFileForm
+from django.conf import settings
+from django.shortcuts import redirect
+from PIL import Image
+from wsgiref.util import FileWrapper
+
+slogans = []
+slogans.append('Resize any image to any size with few clicks!')
+slogans.append('The simplest image resizing app!')
+slogans.append('Just load an image, set the width and height, and click on RESIZE ME!')
 
 def index(request):
 
@@ -23,29 +29,31 @@ def index(request):
 				width = request.POST['width']
 				height = request.POST['height']
 				image_format = request.POST['image_format']
-				print(image_format)
+
 				image = Image.open(filedata)
 				size = int(width), int(height)
 				image = image.resize(size, Image.ANTIALIAS)
 
 				magicNumber = random.randint(0, 9999999)
-				filename = datetime.datetime.now().strftime('%Y_%m_%d_%H_%M_%S_%f') + "_" + str(magicNumber) + "." + str(image_format)
+				#filename = datetime.datetime.now().strftime('%Y_%m_%d_%H_%M_%S_%f') + "_" + str(magicNumber) + "." + str(image_format)
+				filename = "resized_image." + str(image_format)
 
 				try:
-					image.save('C:/Users/Kelvin/Desktop/Django/resizeme/resize/static/imgs/' + filename)
+					image.save( settings.MEDIA_ROOT + "\\" + filename )
 				except AttributeError:
 					print("Couldn't save image {}".format(image))
 
-				return HttpResponseRedirect('static/imgs/' + filename)
+				the_file = settings.MEDIA_ROOT + "\\" + filename
+				filename = os.path.basename(the_file)
+				chunk_size = 8192
+				response = StreamingHttpResponse(FileWrapper(open(the_file, 'rb'), chunk_size), content_type=mimetypes.guess_type(the_file)[0])
+				response['Content-Length'] = os.path.getsize(the_file)    
+				response['Content-Disposition'] = "attachment; filename=%s" % filename
+				return response
 
 		else:
 
 			template = loader.get_template('resize/index.html')
-
-			slogans = []
-			slogans.append('Resize any image to any size with few clicks!')
-			slogans.append('The simplest image resizing app!')
-			slogans.append('Just load an image, set the width and height, and click on RESIZE ME!')
 
 			index = random.randint(0, len(slogans)-1)
 
@@ -58,11 +66,6 @@ def index(request):
 	else:
 
 		template = loader.get_template('resize/index.html')
-
-		slogans = []
-		slogans.append('Resize any image to any size with few clicks!')
-		slogans.append('The simplest image resizing app!')
-		slogans.append('Just load an image, set the width and height, and click on RESIZE ME!')
 
 		index = random.randint(0, len(slogans)-1)
 
