@@ -15,7 +15,7 @@
 	<div class="content">
 		<p>Welcome to RESIZE ME</p>
 
-		<form name="main_form">
+		<form method="post" enctype="multipart/form-data">{% csrf_token %}
 
 			<div class="image">
 				<img id="preview_image" src="{% static 'imgs/placeholder.png' %}" /> <!-- http://placehold.it/400x250 -->
@@ -43,7 +43,7 @@
 			</div>
 
 			<div class="resize_me">
-				<button class="default" name="resize" id="resize">RESIZE ME</button>
+				<button class="default" type="submit" value="resize" name="resize" id="resize">RESIZE ME</button>
 			</div>
 
 			<p>{{ slogan }}</p>

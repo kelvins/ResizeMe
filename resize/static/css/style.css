@@ -14,6 +14,10 @@ p {
 	color: #ef3c4f;
 }
 
+table {
+	border-style: none;
+}
+
 a {
 	color: #ef3c4f;
 	text-decoration: none;
