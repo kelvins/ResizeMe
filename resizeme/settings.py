@@ -123,3 +123,20 @@ STATIC_URL = '/static/'
 
 MEDIA_ROOT = os.path.join(BASE_DIR, 'resize', 'media')
 MEDIA_URL = '/media/'
+
+# Heroku - https://djangogirls.gitbooks.io/django-girls-tutorial-extensions/heroku/
+
+import dj_database_url
+
+DATABASES['default'] = dj_database_url.config()
+
+SECURE_PROXY_SSL_HEADER = ('HTTP_X_FORWARDED_PROTO', 'https')
+
+ALLOWED_HOSTS = ['*']
+
+DEBUG = False
+
+try:
+    from .local_settings import *
+except ImportError:
+    pass
