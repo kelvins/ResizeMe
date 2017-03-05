@@ -1,7 +1,8 @@
+
 language: python
 
 python:
-  - "2.7"
+  - '2.7'
 
 #commands to install dependencies
 install:
@@ -12,6 +13,12 @@ install:
 script:
   - python manage.py test
   - coverage run --source=resizeme manage.py test
-  
+
 # send coverage report to coveralls
 after_success: coveralls
+
+deploy:
+  provider: heroku
+  app: resizeme
+  api_key:
+    secure: FFvyuVKQUcyj9M7IS4LQVY2hv3Lqk/EymfPN//oVZK2Pd0xcXNlq9YErpQKqL0bVzf8y6oH2gil7E6vqvgJgD6cCbiOsK7RBEZg6xbFYVz3i2UXDRPhclI8tRQYeT2zDYM7F6W8snV4EXUsgkVgSl6/j8YvfstMlZqTd2ArsM+7Jny1YlqEslmBRaPQektyJQSqL5a+V+B9iC7scHlFPX+8DtBkt3q77ZoDqPQa8svIKg7dp6Cy6/OMcbW0UNWq5PxHMDu2eNZ363n/8O6KTrLcfbiz7aCLHU1Djo12ULJZyU4RjTAzbGSRgbmkZGKZJI4CHM5/ZncURXHMGnhr2pXHoIGeXeV7kljqdaQuKyOy1K4eGIb6WnmyT9OdIL9lLESC9fVxRNk7/NQ3kSMfn3TwqdeDWmIcyN0MpDNlgQIciiccSoQlAhOAwFBb/PXXYMtaCFtykvx+Cq6AvlRFtjSWFoCqmxTYQkGZ/+icuBPweRfOMzxYsGSlUjZDwF+0tdm2cKUaFryzRaPDA6HUxCXuh3g36gd/MYCE2dYUYMXy3mutTBdzbpjWCQxFmhi5pAGv9MJrDs7rBdCZVEhFAC5rl/r6daGDm4guheDrRcNw1mvrnhkYNnsGydjK6q/7rZCbSqs84JRBTnXpyVp+T3LBWnX5Q4MQXF6zcTbhaMS4=
