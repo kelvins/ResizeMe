@@ -12,10 +12,9 @@ document.getElementById("file").onchange = function () {
 	    // Set the preview_image source
         document.getElementById("preview_image").src = image.src;
         
-		image.onload = function()
-		{
+        // Load the image before get its width and height
+		image.onload = function() {
 	        if( image.width != 0 && image.height != 0 ) {
-
 		        // Show the image original size
 		        document.getElementById("original_size").innerHTML = "Original Size: " + image.width + " X " + image.height;
 	    	}
