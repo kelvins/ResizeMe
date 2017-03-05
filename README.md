@@ -1,6 +1,9 @@
 # ResizeMe
 
-A simple image resizing web application created with Django. 
+A simple image resizing web application created with Django.
+
+[![Software License](https://img.shields.io/badge/license-MIT-brightgreen.svg?style=flat-square)](LICENSE)
+[![Travis](https://travis-ci.org/kelvins/ResizeMe.svg?branch=master)](https://travis-ci.org/kelvins/ResizeMe)
 
 ![ResizeMe](http://i.imgur.com/bY9viOw.png "ResizeMe App")
 
