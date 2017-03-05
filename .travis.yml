@@ -11,7 +11,7 @@ install:
 #command to run the test suite
 script:
   - python manage.py test
-  - coverage run --source=resizeme manage.py test resizeme
+  - coverage run --source=resizeme manage.py test
   
 # send coverage report to coveralls
 after_success: coveralls
