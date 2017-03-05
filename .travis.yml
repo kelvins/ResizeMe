@@ -5,7 +5,6 @@ python:
 
 #commands to install dependencies
 install:
-  - pip install -q Django==$DJANGO
   - pip install -q -r requirements.txt
 
 #command to run the test suite
