@@ -49,15 +49,15 @@ function onWidthValueChanged() {
 
 	var currentWidth = document.getElementById("width").value;
 
-	// Minimum should be 1
+	// Check if the current width is valid
 	if(currentWidth <= 0) {
-		document.getElementById("width").value = 1;
+		currentWidth = 1;
+	}else if(currentWidth > maximum) {
+		currentWidth = maximum;
 	}
 
-	// Maximum should be 5000
-	if(currentWidth > maximum) {
-		document.getElementById("width").value = maximum;
-	}
+	// Update the current width based on the value in the
+	document.getElementById("width").value = currentWidth;
 
 	// If has some image in the preview_image
 	if(document.getElementById("preview_image").src != "") {
@@ -68,13 +68,15 @@ function onWidthValueChanged() {
 	    // Calculates the new height
 	    var newHeight = parseInt(((factor*currentWidth)/100), 10);
 
+	    // Check if the new height is valid
 	    if(newHeight <= 0) {
-			document.getElementById("height").value = 1;
+			newHeight = 1;
 		}else if(newHeight > maximum) {
-			document.getElementById("height").value = maximum;
-		}else {
-			document.getElementById("height").value = newHeight;
+			newHeight = maximum;
 		}
+
+		// Set the new height
+		document.getElementById("height").value = newHeight;
 	}
 }
 
