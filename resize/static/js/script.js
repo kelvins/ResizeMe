@@ -1,5 +1,5 @@
 
-var maximum = 5000;
+const maximum = 5000;
 
 document.getElementById("file").onchange = function () {
 
