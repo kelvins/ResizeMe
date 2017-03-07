@@ -1,9 +1,18 @@
 
+// Maximum width and height
 const maximum = 5000;
+
+// Default image size
+var imgWidth  = 100;
+var imgHeight = 100;
 
 document.getElementById("file").onchange = function () {
 
 	var reader = new FileReader;
+
+	// Reset size
+	imgWidth  = 100;
+	imgHeight = 100;
 
 	reader.onload = function(e) {
 	    var image = new Image();
@@ -17,15 +26,19 @@ document.getElementById("file").onchange = function () {
 	        if( image.width != 0 && image.height != 0 ) {
 		        // Show the image original size
 		        document.getElementById("original_size").innerHTML = "Original Size: " + image.width + " X " + image.height;
+
+		        // Store the original size of the image
+				imgWidth  = image.width;
+				imgHeight = image.height;
+
+				// Update the height based on the width
+			    onWidthValueChanged();
 	    	}
     	}
 	};
 
     // Read the image file as a data URL
     reader.readAsDataURL(this.files[0]);
-
-	// Update the height based on the width
-    onWidthValueChanged();
 };
 
 function onWidthValueChanged() {
@@ -49,14 +62,8 @@ function onWidthValueChanged() {
 	// If has some image in the preview_image
 	if(document.getElementById("preview_image").src != "") {
 
-	    var image = new Image();
-	    image.src = document.getElementById("preview_image").src;
-
-	    // Get the image width and height
-	    var width  = image.width;
-	    var height = image.height;
-
-	    var factor = (height*100)/width;
+		// Calculates the factor based on the size of the original image
+	    var factor = (imgHeight*100)/imgWidth;
 
 	    // Calculates the new height
 	    var newHeight = parseInt(((factor*currentWidth)/100), 10);
