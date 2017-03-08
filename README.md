@@ -1,4 +1,4 @@
-# ResizeMe
+# [ResizeMe][5]
 
 A simple image resizing web application created with Django.
 
@@ -18,3 +18,4 @@ Feel free to contribute by sending a pull request or creating issues.
   [2]: https://www.heroku.com/
   [3]: https://travis-ci.org/
   [4]: https://coveralls.io/
+  [5]: http://resizeme.herokuapp.com/
