@@ -1,9 +1,12 @@
-from django.http import HttpResponse, HttpResponseRedirect, StreamingHttpResponse
+from django.http import HttpResponse
+from django.http import HttpResponseRedirect
+from django.http import StreamingHttpResponse
 from django.core.files.base import ContentFile
 from django.template import loader
-import os, random
+import os
+import random
 from .forms import UploadFileForm
-#from django.conf import settings
+# from django.conf import settings
 from PIL import Image
 from wsgiref.util import FileWrapper
 import tempfile
@@ -16,80 +19,87 @@ slogans.append('This is an open source project created under the MIT license, fe
 slogans.append('If you liked the app please share with your friends!')
 slogans.append('If you find any bug please create an issue on Github!')
 
+
 def index(request):
 
-	error_message = ''
+    error_message = ''
 
-	# If the method is POST
-	if request.method == 'POST':
+    # If the method is POST
+    if request.method == 'POST':
 
-		# Get the form
-		form = UploadFileForm(request.POST, request.FILES)
+        # Get the form
+        form = UploadFileForm(request.POST, request.FILES)
 
-		# Check if the form is valid
-		if form.is_valid():
+        # Check if the form is valid
+        if form.is_valid():
 
-			# Get the file data
-			filedata = request.FILES['file']
+            # Get the file data
+            filedata = request.FILES['file']
 
-			# If the file data is not null
-			if filedata != None:
+            # If the file data is not null
+            if filedata is not None:
 
-				# Get the width and height
-				width  = int(request.POST['width'])
-				height = int(request.POST['height'])
+                # Get the width and height
+                width = int(request.POST['width'])
+                height = int(request.POST['height'])
 
-				# If the width is invalid (it should never happen because it is already validated in HTML and Javascript)
-				if width <= 0 or width > 5000:
-					width = 100
+                # If the width is invalid (it should never happen because it is
+                # already validated in HTML and Javascript)
+                if width <= 0 or width > 5000:
+                    width = 100
 
-				# If the height is invalid (it should never happen because it is already validated in HTML and Javascript)
-				if height <= 0 or height > 5000:
-					height = 100
+                # If the height is invalid (it should never happen because it
+                # is already validated in HTML and Javascript)
+                if height <= 0 or height > 5000:
+                    height = 100
 
-				image_format = request.POST['image_format']
+                image_format = request.POST['image_format']
 
-				# If the image format is invalid, set the PNG as default
-				if image_format != "jpg" and image_format != "png" and image_format != "bmp":
-					image_format = "png"
+                # If the image format is invalid, set the PNG as default
+                if image_format != "jpg" and image_format != "png" and image_format != "bmp":
+                    image_format = "png"
 
-				# The "image.save(tempFile, image_format)" function uses "jpeg" as the image format
-				if image_format == "jpg":
-					image_format = "jpeg"
+                # The "image.save(tempFile, image_format)" function uses "jpeg"
+                # as the image format
+                if image_format == "jpg":
+                    image_format = "jpeg"
 
-				# Create an image object using the Pillow library
-				image = Image.open(filedata)
+                # Create an image object using the Pillow library
+                image = Image.open(filedata)
 
-				# Create a size variable using the width and height
-				size = width, height
+                # Create a size variable using the width and height
+                size = width, height
 
-				# Resize the image using the width and height defined by the user
-				image = image.resize(size, Image.ANTIALIAS)
-				
-				# Temp file (NamedTemporaryFile delete the file as soon as possible)
-				tempFile = tempfile.NamedTemporaryFile()
+                # Resize the image using the width and height defined by the
+                # user
+                image = image.resize(size, Image.ANTIALIAS)
 
-				# Try to save the image in the MEDIA_ROOT
-				try:
-					image.save(tempFile, image_format)
-					tempFile.seek(0)
+                # Temp file (NamedTemporaryFile delete the file as soon as
+                # possible)
+                tempFile = tempfile.NamedTemporaryFile()
 
-					wrapper  = FileWrapper(tempFile)
-					response = StreamingHttpResponse(wrapper, 'image/%s' % image_format)
-					response['Content-Disposition'] = 'attachment; filename=resized_image.%s' % image_format
+                # Try to save the image in the MEDIA_ROOT
+                try:
+                    image.save(tempFile, image_format)
+                    tempFile.seek(0)
 
-					return response
+                    wrapper = FileWrapper(tempFile)
+                    response = StreamingHttpResponse(
+                        wrapper, 'image/%s' % image_format)
+                    response['Content-Disposition'] = 'attachment; filename=resized_image.%s' % image_format
 
-				except AttributeError:
-					error_message = 'Error: unfortunately, we could not resize your image, please try again in a few seconds!'
+                    return response
 
-	template = loader.get_template('resize/index.html')
+                except AttributeError:
+                    error_message = 'Error: unfortunately, we could not resize your image, please try again in a few seconds!'
 
-	index = random.randint(0, len(slogans)-1)
+    template = loader.get_template('resize/index.html')
 
-	context = {
-		'slogan': slogans[index],
-		'error_message': error_message,
-	}
+    index = random.randint(0, len(slogans) - 1)
 
-	return HttpResponse(template.render(context, request))
+    context = {
+        'slogan': slogans[index],
+        'error_message': error_message,
+    }
+
+    return HttpResponse(template.render(context, request))
